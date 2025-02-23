@@ -1,9 +1,17 @@
-﻿namespace BookTracker.Models;
+﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 
-public class Note(string title, string content)
+namespace BookTracker.Models;
+
+[Table("notes")]
+public class Note
 {
+    [PrimaryKey, AutoIncrement]
     public int Id { get; set; }
     
-    public string Title { get; set; } = title;
-    public string Content { get; set; } = content;
+    [ForeignKey(typeof(Book))]
+    public int BookKey { get; set; }
+    
+    public string? Title { get; set; }
+    public string? Content { get; set; }
 }

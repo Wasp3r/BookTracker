@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BookTracker.DataAccess;
+using Microsoft.Extensions.Logging;
 
 namespace BookTracker;
 
@@ -18,6 +19,9 @@ public static class MauiProgram
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
+
+        var dbPath = Path.Combine(FileSystem.AppDataDirectory, "books.db3");
+        builder.Services.AddSingleton<IBooksRepository>(s => ActivatorUtilities.CreateInstance<BooksRepository>(s, dbPath));
 
         return builder.Build();
     }
