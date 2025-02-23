@@ -10,8 +10,8 @@ public class Book
     public int Id { get; set; }
     
     public float Rating { get; set; }
-    public DateOnly StartingDate { get; set; }
-    public DateOnly FinishingDate { get; set; }
+    public DateTime StartingDate { get; set; }
+    public DateTime FinishingDate { get; set; }
     public bool Read { get; set; }
     
     [OneToMany]
