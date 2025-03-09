@@ -1,14 +1,23 @@
-﻿namespace BookTracker;
+﻿using BookTracker.DataAccess;
+using BookTracker.ViewModels;
+
+namespace BookTracker;
 
 public partial class App : Application
 {
-    public App()
+    private readonly IBooksRepository _repository;
+    public static BookListViewModel MainViewModel { get; private set; } 
+    
+    public App(IBooksRepository repository)
     {
+        _repository = repository;
         InitializeComponent();
     }
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
-        return new Window(new AppShell());
+        MainViewModel = new(_repository);
+        MainViewModel.RefreshBooks().ContinueWith(s => { });
+        return new Window(new AppShell());   
     }
 }
