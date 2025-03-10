@@ -1,5 +1,6 @@
 ﻿using BookTracker.DataAccess;
 using BookTracker.Models;
+using BookTracker.Pages;
 
 namespace BookTracker;
 
@@ -10,8 +11,8 @@ public partial class MainPage : ContentPage
         InitializeComponent();
     }
 
-    private void ListView_OnItemTapped(object? sender, ItemTappedEventArgs e)
+    private async void ListView_OnItemTapped(object? sender, ItemTappedEventArgs e)
     {
-        Console.WriteLine("Tapped");
+        await Navigation.PushAsync(new BookDetails());
     }
 }

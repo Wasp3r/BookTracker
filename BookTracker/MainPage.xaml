@@ -14,13 +14,18 @@
             <Label Text="Welcome"/>
             <ListView ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook, Mode=OneWayToSource}" ItemTapped="ListView_OnItemTapped">
                 <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding Name}" TextColor="White"/>
-                        <!-- <TextCell Text="{Binding Name}" x:DataType="vm:BookViewModel"> -->
-                        <!--     <TextCell.ContextActions> -->
-                        <!--         <MenuItem Text="Delete" IsDestructive="False"/> -->
-                        <!--     </TextCell.ContextActions> -->
-                        <!-- </TextCell> -->
+                    <DataTemplate x:DataType="vm:BookViewModel">
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Label Grid.Column="0" Text="{Binding Name}" TextColor="White"/>
+                                <Button Grid.Column="1" Text="Delete" BackgroundColor="Sienna" TextColor="White"/>
+                            </Grid>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
