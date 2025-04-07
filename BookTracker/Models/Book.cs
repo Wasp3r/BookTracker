@@ -13,6 +13,7 @@ public class Book
     public DateTime StartingDate { get; set; }
     public DateTime FinishingDate { get; set; }
     public bool Read { get; set; }
+    public Genre Genre { get; set; }
     
     [OneToMany]
     public List<Note> Notes { get; set; } = new();

@@ -38,4 +38,9 @@ public class BookListViewModel : ObservableObject
 
         Books = collection;
     }
+
+    public async Task CreateBook(Book newBook)
+    {
+        await _booksRepository.InsertBook(newBook);
+    }
 }
