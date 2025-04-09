@@ -1,4 +1,5 @@
 ﻿using BookTracker.Models;
+using BookTracker.ViewModels;
 using SQLite;
 
 namespace BookTracker.DataAccess;
@@ -31,12 +32,19 @@ public class BooksRepository : IBooksRepository
     public async Task InsertBook(Book book)
     {
         await Initialize();
-        await _connection.InsertAsync(book);
+        // TODO: Figure a way to get the ID of the newly created book
+        book.Id = await _connection.InsertAsync(book);
     }
 
     public async Task UpdateBook(Book book)
     {
         await Initialize();
         await _connection.UpdateAsync(book);
+    }
+
+    public async Task DeleteBook(int bookToRemove)
+    {
+        await Initialize();
+        await _connection.DeleteAsync<int>(bookToRemove);
     }
 }

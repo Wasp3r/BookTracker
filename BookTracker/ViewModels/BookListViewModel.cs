@@ -1,4 +1,5 @@
-﻿using BookTracker.DataAccess;
+﻿using System.Collections.ObjectModel;
+using BookTracker.DataAccess;
 using BookTracker.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -7,7 +8,7 @@ namespace BookTracker.ViewModels;
 public class BookListViewModel : ObservableObject
 {
     private readonly IBooksRepository _booksRepository;
-    private List<BookViewModel> _books;
+    private ObservableCollection<BookViewModel> _books;
     private BookViewModel _selectedBook;
 
     public BookListViewModel(IBooksRepository booksRepository)
@@ -15,7 +16,7 @@ public class BookListViewModel : ObservableObject
         _booksRepository = booksRepository;
     }
 
-    public List<BookViewModel> Books
+    public ObservableCollection<BookViewModel> Books
     {
         get => _books;
         set => SetProperty(ref _books, value);
@@ -30,7 +31,7 @@ public class BookListViewModel : ObservableObject
     public async Task RefreshBooks()
     {
         var books = await _booksRepository.GetAllBooks();
-        var collection = new List<BookViewModel>();
+        var collection = new ObservableCollection<BookViewModel>();
         foreach (var book in books)
         {
             collection.Add(new BookViewModel(book));
@@ -42,5 +43,12 @@ public class BookListViewModel : ObservableObject
     public async Task CreateBook(Book newBook)
     {
         await _booksRepository.InsertBook(newBook);
+        Books.Add(new BookViewModel(newBook));
+    }
+
+    public async Task DeleteBook(BookViewModel bookToRemove)
+    {
+        await _booksRepository.DeleteBook(bookToRemove.Id);
+        Books.Remove(bookToRemove);
     }
 }
