@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using BookTracker.DataAccess;
 using BookTracker.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BookTracker.ViewModels;
 
@@ -14,6 +16,7 @@ public class BookListViewModel : ObservableObject
     public BookListViewModel(IBooksRepository booksRepository)
     {
         _booksRepository = booksRepository;
+        RemoveBookCommand = new AsyncRelayCommand<BookViewModel>(DeleteBook);
     }
 
     public ObservableCollection<BookViewModel> Books
@@ -27,6 +30,8 @@ public class BookListViewModel : ObservableObject
         get => _selectedBook;
         set => SetProperty(ref _selectedBook, value);
     }
+
+    public ICommand RemoveBookCommand { get; set; }
 
     public async Task RefreshBooks()
     {
@@ -46,8 +51,9 @@ public class BookListViewModel : ObservableObject
         Books.Add(new BookViewModel(newBook));
     }
 
-    public async Task DeleteBook(BookViewModel bookToRemove)
+    private async Task DeleteBook(BookViewModel? bookToRemove)
     {
+        if (bookToRemove == null) return;
         await _booksRepository.DeleteBook(bookToRemove.Id);
         Books.Remove(bookToRemove);
     }

@@ -7,5 +7,5 @@ public interface IBooksRepository
     Task<List<Book>> GetAllBooks();
     Task InsertBook(Book book);
     Task UpdateBook(Book book);
-    Task DeleteBook(int idToRemove);
+    Task DeleteBook(int bookId);
 }

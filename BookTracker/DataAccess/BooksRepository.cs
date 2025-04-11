@@ -32,8 +32,15 @@ public class BooksRepository : IBooksRepository
     public async Task InsertBook(Book book)
     {
         await Initialize();
-        // TODO: Figure a way to get the ID of the newly created book
-        book.Id = await _connection.InsertAsync(book);
+        var result = await _connection.InsertAsync(book);
+        if (result != 1)
+        {
+            // TODO: Logging system could be implemented
+            Console.WriteLine("Failed to insert new book");
+            return;
+        }
+
+        book.Id = await _connection.ExecuteScalarAsync<int>("SELECT last_insert_rowid();");
     }
 
     public async Task UpdateBook(Book book)
@@ -42,9 +49,19 @@ public class BooksRepository : IBooksRepository
         await _connection.UpdateAsync(book);
     }
 
-    public async Task DeleteBook(int bookToRemove)
+    public async Task DeleteBook(int bookId)
     {
         await Initialize();
-        await _connection.DeleteAsync<int>(bookToRemove);
+        try
+        {
+            var bookToRemove = await _connection.Table<Book>().FirstOrDefaultAsync(x => x.Id == bookId);
+            if (bookToRemove == null) return;
+            await _connection.DeleteAsync(bookToRemove);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }
