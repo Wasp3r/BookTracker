@@ -17,8 +17,9 @@ public partial class NewBook : ContentPage
     {
         try
         {
-            await App.MainViewModel.CreateBook(_viewModel.NewBook);
-            await Navigation.PopAsync();
+            var newBookViewModel = await App.MainViewModel.CreateBook(_viewModel.NewBook);
+            App.MainViewModel.SelectedBook = newBookViewModel;
+            await Navigation.PushAsync(new BookDetails());
         }
         catch (Exception error)
         {

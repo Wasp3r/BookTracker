@@ -45,10 +45,12 @@ public class BookListViewModel : ObservableObject
         Books = collection;
     }
 
-    public async Task CreateBook(Book newBook)
+    public async Task<BookViewModel> CreateBook(Book newBook)
     {
         await _booksRepository.InsertBook(newBook);
-        Books.Add(new BookViewModel(newBook));
+        var newBookViewModel = new BookViewModel(newBook);
+        Books.Add(newBookViewModel);
+        return newBookViewModel;
     }
 
     private async Task DeleteBook(BookViewModel? bookToRemove)

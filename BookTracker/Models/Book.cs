@@ -12,12 +12,13 @@ public class Book
     public float Rating { get; set; }
     public DateTime StartingDate { get; set; }
     public DateTime FinishingDate { get; set; }
-    public bool Read { get; set; }
+    public bool Started { get; set; }
+    public bool Finished { get; set; }
     public Genre Genre { get; set; }
     
     [OneToMany]
     public List<Note> Notes { get; set; } = new();
     
-    public string? Name { get; set; }
-    public string? Author { get; set; }
+    public string Name { get; set; }
+    public string Author { get; set; }
 }

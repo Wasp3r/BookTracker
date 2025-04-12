@@ -17,10 +17,15 @@
         <Label Text="Author" HeightRequest="30"/>
         <Entry Placeholder="Author" Text="{Binding NewBook.Author, Mode=OneWayToSource}" HeightRequest="30"/>
         <Label Text="Genre" HeightRequest="30"/>
-        <!-- TODO: Converted doesn't work. Investigate -->
         <Picker Title="Select genre" ItemsSource="{Binding Genres}" SelectedIndex="{Binding SelectedGenre, Mode=OneWayToSource, Converter={StaticResource IntToGenre}}" HeightRequest="70"/>
         <Label Text="Finished" HeightRequest="30"/>
-        <CheckBox HeightRequest="30"/>
+        <CheckBox HeightRequest="30" IsChecked="{Binding Finished, Mode=OneWayToSource}"/>
+        <Label Text="Started" HeightRequest="30"/>
+        <CheckBox HeightRequest="30" IsChecked="{Binding Started, Mode=OneWayToSource}"/>
+        <Label IsVisible="{Binding Started}" Text="Start date" HeightRequest="30"/>
+        <DatePicker IsVisible="{Binding Started}" Date="{Binding NewBook.StartingDate}"/>
+        <Label IsVisible="{Binding Finished}" Text="Finish date" HeightRequest="30"/>
+        <DatePicker IsVisible="{Binding Finished}" Date="{Binding NewBook.FinishingDate}"/>
         <Button Text="Create" Clicked="Create_OnClicked"/>
         <Button Text="Cancel" Clicked="Cancel_OnClicked"/>
     </StackLayout>

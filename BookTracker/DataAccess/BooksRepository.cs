@@ -26,7 +26,15 @@ public class BooksRepository : IBooksRepository
     public async Task<List<Book>> GetAllBooks()
     {
         await Initialize();
-        return await _connection.Table<Book>().ToListAsync();
+        try
+        {
+            return await _connection.Table<Book>().ToListAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Failed to load books. Error: {e}");
+            return new List<Book>();
+        }
     }
 
     public async Task InsertBook(Book book)

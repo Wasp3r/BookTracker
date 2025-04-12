@@ -7,6 +7,8 @@ public class NewBookViewModel : ObservableObject
 {
     private Book _newBook;
     private Genre _selectedGenre;
+    private bool _started;
+    private bool _finished;
     
     public NewBookViewModel()
     {
@@ -26,6 +28,26 @@ public class NewBookViewModel : ObservableObject
     {
         get => _selectedGenre;
         set => SetProperty(ref _selectedGenre, value);
+    }
+
+    public bool Started
+    {
+        get => _started;
+        set
+        {
+            SetProperty(ref _started, value);
+            _newBook.Started = value;
+        }
+    }
+
+    public bool Finished
+    {
+        get => _finished;
+        set
+        {
+            SetProperty(ref _finished, value);
+            _newBook.Finished = value;
+        }
     }
 
     public bool CanCreate => IsBookValid();
