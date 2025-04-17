@@ -81,6 +81,7 @@ public class BookViewModel : ObservableObject
         Name = sourceBook.Name;
         Author = sourceBook.Author;
         Rating = sourceBook.Rating;
+        Genre = sourceBook.Genre;
         StartingDate = sourceBook.StartingDate;
         FinishingDate = sourceBook.FinishingDate;
         Started = sourceBook.Started;

@@ -18,7 +18,7 @@ public class Book
     
     [OneToMany]
     public List<Note> Notes { get; set; } = new();
-    
-    public string Name { get; set; }
-    public string Author { get; set; }
+
+    public string Name { get; set; } = string.Empty;
+    public string Author { get; set; } = string.Empty;
 }

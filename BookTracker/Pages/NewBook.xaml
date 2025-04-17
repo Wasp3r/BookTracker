@@ -13,20 +13,24 @@
     <StackLayout Spacing="5">
         <Label Text="New book entry" HeightRequest="30"/>
         <Label Text="Title" HeightRequest="30"/>
-        <Entry Placeholder="Enter book title" Text="{Binding NewBook.Name, Mode=OneWayToSource}" HeightRequest="30"/>
+        <Entry Placeholder="Enter book title" Text="{Binding Name, Mode=OneWayToSource}" HeightRequest="30"/>
         <Label Text="Author" HeightRequest="30"/>
-        <Entry Placeholder="Author" Text="{Binding NewBook.Author, Mode=OneWayToSource}" HeightRequest="30"/>
+        <Entry Placeholder="Author" Text="{Binding Author, Mode=OneWayToSource}" HeightRequest="30"/>
         <Label Text="Genre" HeightRequest="30"/>
         <Picker Title="Select genre" ItemsSource="{Binding Genres}" SelectedIndex="{Binding SelectedGenre, Mode=OneWayToSource, Converter={StaticResource IntToGenre}}" HeightRequest="70"/>
-        <Label Text="Finished" HeightRequest="30"/>
-        <CheckBox HeightRequest="30" IsChecked="{Binding Finished, Mode=OneWayToSource}"/>
         <Label Text="Started" HeightRequest="30"/>
         <CheckBox HeightRequest="30" IsChecked="{Binding Started, Mode=OneWayToSource}"/>
-        <Label IsVisible="{Binding Started}" Text="Start date" HeightRequest="30"/>
-        <DatePicker IsVisible="{Binding Started}" Date="{Binding NewBook.StartingDate}"/>
-        <Label IsVisible="{Binding Finished}" Text="Finish date" HeightRequest="30"/>
-        <DatePicker IsVisible="{Binding Finished}" Date="{Binding NewBook.FinishingDate}"/>
-        <Button Text="Create" Clicked="Create_OnClicked"/>
+        <StackLayout IsVisible="{Binding Started}" Orientation="Horizontal">
+            <Label IsVisible="{Binding Started}" Text="Start date" HeightRequest="30"/>
+            <DatePicker IsVisible="{Binding Started}" Date="{Binding NewBook.StartingDate}"/>
+        </StackLayout>
+        <Label Text="Finished" HeightRequest="30"/>
+        <CheckBox HeightRequest="30" IsChecked="{Binding Finished, Mode=OneWayToSource}"/>
+        <StackLayout IsVisible="{Binding Finished}" Orientation="Horizontal">
+            <Label IsVisible="{Binding Finished}" Text="Finish date" HeightRequest="30"/>
+            <DatePicker IsVisible="{Binding Finished}" Date="{Binding NewBook.FinishingDate}"/>
+        </StackLayout>
+        <Button Text="Create" IsEnabled="{Binding CanCreate}" Clicked="Create_OnClicked"/>
         <Button Text="Cancel" Clicked="Cancel_OnClicked"/>
     </StackLayout>
 </ContentPage>
