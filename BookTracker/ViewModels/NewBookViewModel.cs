@@ -13,6 +13,7 @@ public class NewBookViewModel : ObservableObject
     private bool _started;
     private bool _finished;
     private bool _canCreate;
+    private float _rating;
     
     public NewBookViewModel()
     {
@@ -72,6 +73,8 @@ public class NewBookViewModel : ObservableObject
         {
             SetProperty(ref _started, value);
             _newBook.Started = value;
+            if (Started) return;
+            Finished = false;
         }
     }
 
@@ -82,6 +85,18 @@ public class NewBookViewModel : ObservableObject
         {
             SetProperty(ref _finished, value);
             _newBook.Finished = value;
+            if (!Finished) return;
+            Started = true;
+        }
+    }
+
+    public float Rating
+    {
+        get => _rating;
+        set
+        {
+            SetProperty(ref _rating, value);
+            _newBook.Rating = _rating;
         }
     }
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 using BookTracker.DataAccess;
 using BookTracker.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -31,7 +30,7 @@ public class BookListViewModel : ObservableObject
         set => SetProperty(ref _selectedBook, value);
     }
 
-    public ICommand RemoveBookCommand { get; set; }
+    public IAsyncRelayCommand RemoveBookCommand { get; set; }
 
     public async Task RefreshBooks()
     {

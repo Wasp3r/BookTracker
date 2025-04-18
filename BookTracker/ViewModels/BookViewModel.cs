@@ -20,19 +20,19 @@ public class BookViewModel : ObservableObject
     
     public string Name
     {
-        get => _name;
+        get => $"Book name: {_name}";
         private set => SetProperty(ref _name, value);
     }
 
     public string Author
     {
-        get => _author;
+        get => $"Author: {_author}";
         set => SetProperty(ref _author, value);
     }
 
     public float Rating
     {
-        get => _rating;
+        get => _rating * 100;
         set => SetProperty(ref _rating, value);
     }
 

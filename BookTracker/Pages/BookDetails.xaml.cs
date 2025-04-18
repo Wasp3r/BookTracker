@@ -12,4 +12,10 @@ public partial class BookDetails : ContentPage
     {
         await Navigation.PushAsync(new MainPage());
     }
+
+    private async void RemoveBookClicked(object? sender, EventArgs e)
+    {
+        await App.MainViewModel.RemoveBookCommand.ExecuteAsync(App.MainViewModel.SelectedBook);
+        await Navigation.PushAsync(new MainPage());
+    }
 }

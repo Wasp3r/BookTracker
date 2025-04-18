@@ -19,16 +19,20 @@
         <Label Text="Genre" HeightRequest="30"/>
         <Picker Title="Select genre" ItemsSource="{Binding Genres}" SelectedIndex="{Binding SelectedGenre, Mode=OneWayToSource, Converter={StaticResource IntToGenre}}" HeightRequest="70"/>
         <Label Text="Started" HeightRequest="30"/>
-        <CheckBox HeightRequest="30" IsChecked="{Binding Started, Mode=OneWayToSource}"/>
+        <CheckBox HeightRequest="30" IsChecked="{Binding Started, Mode=TwoWay}"/>
         <StackLayout IsVisible="{Binding Started}" Orientation="Horizontal">
-            <Label IsVisible="{Binding Started}" Text="Start date" HeightRequest="30"/>
-            <DatePicker IsVisible="{Binding Started}" Date="{Binding NewBook.StartingDate}"/>
+            <Label Text="Start date" HeightRequest="30"/>
+            <DatePicker Date="{Binding NewBook.StartingDate}"/>
         </StackLayout>
         <Label Text="Finished" HeightRequest="30"/>
-        <CheckBox HeightRequest="30" IsChecked="{Binding Finished, Mode=OneWayToSource}"/>
-        <StackLayout IsVisible="{Binding Finished}" Orientation="Horizontal">
-            <Label IsVisible="{Binding Finished}" Text="Finish date" HeightRequest="30"/>
-            <DatePicker IsVisible="{Binding Finished}" Date="{Binding NewBook.FinishingDate}"/>
+        <CheckBox HeightRequest="30" IsChecked="{Binding Finished, Mode=TwoWay}"/>
+        <StackLayout IsVisible="{Binding Finished}">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Finish date" HeightRequest="30"/>
+                <DatePicker Date="{Binding NewBook.FinishingDate}"/>
+            </StackLayout>
+            <Label Text="Rating"/>
+            <Slider Value="{Binding Rating, Mode=OneWayToSource, FallbackValue=0.5}" Minimum="0" Maximum="1" MinimumTrackColor="Red" MaximumTrackColor="Green" ThumbColor="Blue"/>
         </StackLayout>
         <Button Text="Create" IsEnabled="{Binding CanCreate}" Clicked="Create_OnClicked"/>
         <Button Text="Cancel" Clicked="Cancel_OnClicked"/>

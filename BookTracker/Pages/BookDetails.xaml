@@ -9,6 +9,19 @@
         <Label FontSize="24" Text="{Binding Name}"/>
         <Label FontSize="24" Text="{Binding Author}"/>
         <Label FontSize="24" Text="{Binding Genre}"/>
+        <StackLayout Orientation="Horizontal">
+            <Label FontSize="24" Text="Rating"/>
+            <Label FontSize="24" Text="{Binding Rating}"/>
+        </StackLayout>
+        <StackLayout IsVisible="{Binding Started}" Orientation="Horizontal">
+            <Label FontSize="24" Text="Started date"/>
+            <Label FontSize="24" Text="{Binding StartingDate.Date}"/>
+        </StackLayout>
+        <StackLayout IsVisible="{Binding Finished}" Orientation="Horizontal">
+            <Label FontSize="24" Text="Finished date"/>
+            <Label FontSize="24" Text="{Binding FinishingDate.Date}"/>
+        </StackLayout>
+        <Button Text="Remove" Clicked="RemoveBookClicked"/>
         <Button Text="Back" Clicked="BackButtonClicked"/>
     </StackLayout>
 </ContentPage>
