@@ -15,24 +15,41 @@ public class BookViewModel : ObservableObject
     private bool _finished;
     private Genre _genre;
     private List<Note> _notes;
+    
+    public BookViewModel(Book sourceBook)
+    {
+        if (sourceBook == null) 
+            throw new ArgumentNullException(nameof(sourceBook));
+        
+        _id = sourceBook.Id;
+        Name = sourceBook.Name;
+        Author = sourceBook.Author;
+        Rating = sourceBook.Rating;
+        Genre = sourceBook.Genre;
+        StartingDate = sourceBook.StartingDate;
+        FinishingDate = sourceBook.FinishingDate;
+        Started = sourceBook.Started;
+        Finished = sourceBook.Finished;
+        Notes = sourceBook.Notes;
+    }
 
     public int Id => _id;
     
     public string Name
     {
-        get => $"Book name: {_name}";
+        get => _name;
         private set => SetProperty(ref _name, value);
     }
 
     public string Author
     {
-        get => $"Author: {_author}";
+        get => _author;
         set => SetProperty(ref _author, value);
     }
 
     public float Rating
     {
-        get => _rating * 100;
+        get => _rating;
         set => SetProperty(ref _rating, value);
     }
 
@@ -70,22 +87,5 @@ public class BookViewModel : ObservableObject
     {
         get => _notes;
         set => SetProperty(ref _notes, value);
-    }
-
-    public BookViewModel(Book sourceBook)
-    {
-        if (sourceBook == null) 
-            throw new ArgumentNullException(nameof(sourceBook));
-        
-        _id = sourceBook.Id;
-        Name = sourceBook.Name;
-        Author = sourceBook.Author;
-        Rating = sourceBook.Rating;
-        Genre = sourceBook.Genre;
-        StartingDate = sourceBook.StartingDate;
-        FinishingDate = sourceBook.FinishingDate;
-        Started = sourceBook.Started;
-        Finished = sourceBook.Finished;
-        Notes = sourceBook.Notes;
     }
 }

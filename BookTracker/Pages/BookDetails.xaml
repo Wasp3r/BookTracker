@@ -5,23 +5,36 @@
              xmlns:vm="clr-namespace:BookTracker.ViewModels"
              x:Class="BookTracker.Pages.BookDetails"
              x:DataType="vm:BookViewModel">
-    <StackLayout Orientation="Vertical">
-        <Label FontSize="24" Text="{Binding Name}"/>
-        <Label FontSize="24" Text="{Binding Author}"/>
-        <Label FontSize="24" Text="{Binding Genre}"/>
-        <StackLayout Orientation="Horizontal">
-            <Label FontSize="24" Text="Rating"/>
-            <Label FontSize="24" Text="{Binding Rating}"/>
-        </StackLayout>
-        <StackLayout IsVisible="{Binding Started}" Orientation="Horizontal">
-            <Label FontSize="24" Text="Started date"/>
-            <Label FontSize="24" Text="{Binding StartingDate.Date}"/>
-        </StackLayout>
-        <StackLayout IsVisible="{Binding Finished}" Orientation="Horizontal">
-            <Label FontSize="24" Text="Finished date"/>
-            <Label FontSize="24" Text="{Binding FinishingDate.Date}"/>
-        </StackLayout>
+    <StackLayout Spacing="5" Padding="5">
+        <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *">
+            <StackLayout Grid.Row="0" Spacing="3">
+                <Label Text="Title" FontSize="16"/>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Entry Grid.Column="0" Text="{Binding Name}" IsEnabled="False" Margin="0, 0, 3, 0"/>
+                    <Button Grid.Column="1" ImageSource="pen_to_square_solid.png" HeightRequest="20" WidthRequest="20"/>
+                </Grid>
+            </StackLayout>
+            <Label Grid.Row="1" FontSize="24" Text="{Binding Author}" HeightRequest="50"/>
+            <Label Grid.Row="2" FontSize="24" Text="{Binding Genre}"/>
+            <StackLayout Grid.Row="3" Orientation="Horizontal">
+                <Label FontSize="24" Text="Rating"/>
+                <Label FontSize="24" Text="{Binding Rating}"/>
+            </StackLayout>
+            <StackLayout Grid.Row="4" IsVisible="{Binding Started}" Orientation="Horizontal">
+                <Label FontSize="24" Text="Started date"/>
+                <Label FontSize="24" Text="{Binding StartingDate.Date}"/>
+            </StackLayout>
+            <StackLayout Grid.Row="5" IsVisible="{Binding Finished}" Orientation="Horizontal">
+                <Label FontSize="24" Text="Finished date"/>
+                <Label FontSize="24" Text="{Binding FinishingDate.Date}"/>
+            </StackLayout>
+            <ScrollView Grid.Row="6" Orientation="Vertical">
+            
+            </ScrollView>
+        </Grid>
+        
         <Button Text="Remove" Clicked="RemoveBookClicked"/>
         <Button Text="Back" Clicked="BackButtonClicked"/>
     </StackLayout>
+    
 </ContentPage>
